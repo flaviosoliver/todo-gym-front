@@ -1,0 +1,48 @@
+<div class="login-container">
+  <img
+    src="../../../assets/img/to-do_gym.png"
+    class="login-img"
+    alt="To-do Gym"
+    width="200px"
+  />
+  <form (ngSubmit)="onLogin()" class="login-form">
+    <span class="login-form-title-input">E-mail:</span>
+    <input type="text" placeholder="e-mail" [(ngModel)]="email" />
+    <span class="login-form-title-input">Senha:</span>
+    <span class="login-form-password-container">
+      <input
+        [type]="hide ? 'password' : 'text'"
+        placeholder="senha"
+        [(ngModel)]="password"
+        class="login-form-password-input"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Mostrar senha'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </span>
+    <button *ngIf="!isLoading" class="btn-confirm" type="submit">Entrar</button>
+    <mat-progress-spinner
+      *ngIf="isLoading"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+  </form>
+  <span class="login-text-forgot-password">
+    <a href="#" class="custom-link">Esqueci minha senha</a>
+  </span>
+  <span class="login-text-new-user">
+    Caso não possua cadastro,
+    <a href="#" class="custom-link">Criar Novo</a>
+  </span>
+  <div class="login-footer">
+    Desenvolvido por Flávio Oliveira -&nbsp;
+    <a href="https://github.com/flaviosoliver" class="custom-link">
+      @flaviosoliver</a
+    >
+  </div>
+</div>
