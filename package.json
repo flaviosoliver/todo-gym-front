@@ -24,6 +24,7 @@
     "@angular/router": "^16.1.0",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
+    "jwt-decode": "^3.1.2",
     "material-icons": "^1.13.8",
     "ngx-cookie-service": "^16.0.0",
     "rxjs": "~7.8.0",
