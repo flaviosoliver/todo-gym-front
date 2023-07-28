@@ -5,16 +5,37 @@
     alt="To-do Gym"
     width="200px"
   />
-  <form (ngSubmit)="onLogin()" class="login-form">
+  <form [formGroup]="loginForm" class="login-form">
     <span class="login-form-title-input">E-mail:</span>
-    <input type="text" placeholder="e-mail" [(ngModel)]="email" />
+    <input
+      class="login-form-element"
+      type="text"
+      placeholder="e-mail"
+      formControlName="email"
+      required
+    />
+    <span
+      class="login-form-text-invalid"
+      *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>E-mail é obrigatório</span>
+    </span>
+    <span
+      class="login-form-text-invalid"
+      *ngIf="loginForm.get('email')?.errors?.['pattern'] && loginForm.get('email')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>E-mail com formato inválido</span>
+    </span>
     <span class="login-form-title-input">Senha:</span>
-    <span class="login-form-password-container">
+    <span class="login-form-password-container login-form-element">
       <input
+        class="login-form-password-input"
         [type]="hide ? 'password' : 'text'"
         placeholder="senha"
-        [(ngModel)]="password"
-        class="login-form-password-input"
+        formControlName="password"
+        required
       />
       <button
         mat-icon-button
@@ -23,21 +44,45 @@
         [attr.aria-label]="'Mostrar senha'"
         [attr.aria-pressed]="hide"
       >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        <span class="material-icons-sharp">{{
+          hide ? "visibility_off" : "visibility"
+        }}</span>
       </button>
     </span>
-    <button *ngIf="!isLoading" class="btn-confirm" type="submit">Entrar</button>
+    <span
+      class="login-form-text-invalid"
+      *ngIf="loginForm.get('password')?.errors?.['pattern'] && loginForm.get('password')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>Senha deve conter 6 dígitos ou mais</span>
+    </span>
+    <button
+      *ngIf="!isLoading"
+      class="btn-confirm login-form-element"
+      type="submit"
+      [disabled]="!loginForm!.valid"
+      (click)="onLogin()"
+    >
+      Entrar
+    </button>
     <mat-progress-spinner
+      class="login-spinner"
       *ngIf="isLoading"
       mode="indeterminate"
     ></mat-progress-spinner>
   </form>
-  <span class="login-text-forgot-password">
+  <!-- <span class="login-text-forgot-password">
     <a href="#" class="custom-link">Esqueci minha senha</a>
-  </span>
-  <span class="login-text-new-user">
+  </span> -->
+  <div class="login-form-element" *ngIf="loginFail">
+    <p class="login-failed-text">
+      <span><mat-icon>error</mat-icon></span>
+      <span>E-mail ou senha incorretos</span>
+    </p>
+  </div>
+  <span class="login-text-new-user login-form-element">
     Caso não possua cadastro,
-    <a href="#" class="custom-link">Criar Novo</a>
+    <a [routerLink]="['/new-user']" class="custom-link">Criar Novo</a>
   </span>
   <div class="login-footer">
     Desenvolvido por Flávio Oliveira -&nbsp;
