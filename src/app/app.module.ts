@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 import { NewUserComponent } from './pages/new-user/new-user.component';
 
+import { registerLocaleData } from '@angular/common';
+import localePtBr from '@angular/common/locales/pt';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
+registerLocaleData(localePtBr);
+
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent, NewUserComponent],
   imports: [
@@ -27,7 +33,11 @@ import { NewUserComponent } from './pages/new-user/new-user.component';
     SharedModule,
     AuthModule,
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
