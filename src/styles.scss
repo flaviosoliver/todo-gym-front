@@ -279,9 +279,72 @@ body {
     padding: 6px;
   }
 
+  .btn-confirm:disabled {
+    background-color: mat.get-color-from-palette($md-primary, 50);
+    color: mat.get-color-from-palette($md-primary, 100);
+  }
+
   a.custom-link {
     text-decoration: none;
     font-weight: 600;
     color: mat.get-color-from-palette($md-accent, 500);
   }
+
+  .custom-spinner {
+    display: flex;
+    align-self: center;
+    width: 40px !important;
+  }
+}
+
+.mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+  height: 15px;
+}
+
+.mat-datepicker-input.mat-mdc-input-element.mat-mdc-form-field-input-control.mdc-text-field__input.cdk-text-field-autofill-monitored {
+  padding: 6px;
+}
+
+.mat-mdc-form-field-flex {
+  height: 36px;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label.mdc-text-field {
+  border-radius: 20px;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+    .mdc-text-field--textarea
+  )
+  .mat-mdc-form-field-infix {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+  .mat-mdc-form-field-infix {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+    .mdc-text-field--textarea
+  )
+  .mat-mdc-form-field-infix {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+  .mat-mdc-form-field-infix {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+    .mdc-text-field--textarea
+  )
+  .mat-mdc-form-field-infix {
+  padding-top: 0;
+  padding-bottom: 0;
 }
