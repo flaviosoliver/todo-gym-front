@@ -1,0 +1,82 @@
+@use "@angular/material" as mat;
+@import "../../../styles.scss";
+
+@include mat.core();
+
+.new-user-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  padding: 0 10px;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgb(139, 233, 195) 47.7%,
+    rgba(92, 202, 238) 93.6%
+  );
+
+  .new-user-form,
+  .new-user-form-shape-container {
+    display: flex;
+    flex-direction: column;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .new-user-form-shape-container {
+    input {
+      width: 80px;
+    }
+
+    .new-user-form-calcs,
+    .new-user-form-shape {
+      display: flex;
+      gap: 15px;
+
+      .new-user-form-calcs-column,
+      .new-user-form-shape-column {
+        display: grid;
+      }
+    }
+  }
+
+  .new-user-form-password-container {
+    input.new-user-form-password-input {
+      border-radius: 20px 0 0 20px !important;
+      width: 79%;
+    }
+    button {
+      width: 30px;
+      height: 36px;
+      padding: 0;
+      background-color: mat.get-color-from-palette($md-accent, 500);
+      border-radius: 0 20px 20px 0;
+      top: 4.3px;
+
+      span.material-icons-sharp {
+        color: mat.get-color-from-palette($md-secondary, A100);
+        font-size: 18px;
+      }
+    }
+  }
+
+  input {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .new-user-form-element {
+    margin-bottom: 15px;
+  }
+
+  .new-user-form-text-invalid {
+    color: mat.get-color-from-palette($md-warning, 500);
+    display: flex;
+    justify-content: center;
+    margin: -10px auto 10px auto;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+}

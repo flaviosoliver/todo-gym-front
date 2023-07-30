@@ -1,3 +1,157 @@
-<p>
-  new-user works!
-</p>
+<div class="new-user-container">
+  <h2>Criar Novo Usuário</h2>
+  <form [formGroup]="userForm" class="new-user-form">
+    <span class="new-user-form-title">Nome:</span>
+    <input
+      type="text"
+      class="new-user-form-element"
+      placeholder="nome"
+      formControlName="firstName"
+      required
+    />
+    <span
+      class="new-user-form-text-invalid"
+      *ngIf="userForm.get('firstName')?.errors?.['required'] && userForm.get('firstName')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>Nome é obrigatório</span>
+    </span>
+    <span class="new-user-form-title">Sobrenome:</span>
+    <input
+      type="text"
+      class="new-user-form-element"
+      placeholder="sobrenome"
+      formControlName="lastName"
+      required
+    />
+    <span
+      class="new-user-form-text-invalid"
+      *ngIf="userForm.get('lastName')?.errors?.['required'] && userForm.get('lastName')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>Sobrenome é obrigatório</span>
+    </span>
+    <span>Data de nascimento:</span>
+    <mat-form-field>
+      <input
+        formControlName="birthDate"
+        matInput
+        [matDatepicker]="birth"
+        readonly
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="birth"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #birth disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <div class="new-user-form-shape-container" formGroupName="shape">
+      <h3>Seu físico hoje:</h3>
+      <div class="new-user-form-calcs">
+        <div class="new-user-form-calcs-column">
+          <span>Idade:</span>
+          <input
+            type="number"
+            class="new-user-form-element"
+            placeholder="idade"
+            formControlName="age"
+            readonly
+            required
+          />
+        </div>
+        <div class="new-user-form-calcs-column">
+          <span class="new-user-form-title">Resultado IMC:</span>
+          <input
+            type="number"
+            class="new-user-form-element"
+            formControlName="bmi"
+            (input)="onWeightInputChange($event)"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="new-user-form-shape">
+        <div class="new-user-form-shape-column">
+          <span class="new-user-form-title">Peso (kg):</span>
+          <input
+            type="number"
+            class="new-user-form-element"
+            formControlName="weight"
+          />
+        </div>
+        <div class="new-user-form-shape-column">
+          <span class="new-user-form-title">Altura (cm):</span>
+          <input
+            type="number"
+            class="new-user-form-element"
+            formControlName="height"
+          />
+        </div>
+      </div>
+    </div>
+    <span class="new-user-form-title-input">E-mail:</span>
+    <input
+      class="new-user-form-element"
+      type="email"
+      placeholder="e-mail"
+      formControlName="email"
+      required
+    />
+    <span
+      class="new-user-form-text-invalid"
+      *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>E-mail é obrigatório</span>
+    </span>
+    <span
+      class="new-user-form-text-invalid"
+      *ngIf="userForm.get('email')?.errors?.['pattern'] && userForm.get('email')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>E-mail com formato inválido</span>
+    </span>
+    <span class="new-user-form-title-input">Senha:</span>
+    <span class="new-user-form-password-container new-user-form-element">
+      <input
+        class="new-user-form-password-input"
+        [type]="hide ? 'password' : 'text'"
+        placeholder="senha"
+        formControlName="password"
+        required
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Mostrar senha'"
+        [attr.aria-pressed]="hide"
+      >
+        <span class="material-icons-sharp">{{
+          hide ? "visibility_off" : "visibility"
+        }}</span>
+      </button>
+    </span>
+    <span
+      class="new-user-form-text-invalid"
+      *ngIf="userForm.get('password')?.errors?.['pattern'] && userForm.get('password')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>Senha deve conter 6 dígitos ou mais</span>
+    </span>
+    <button
+      *ngIf="!isLoading"
+      class="btn-confirm new-user-form-element"
+      type="submit"
+      (click)="saveUser()"
+      [disabled]="!userForm!.valid"
+    >
+      Salvar
+    </button>
+    <mat-progress-spinner
+      class="custom-spinner"
+      *ngIf="isLoading"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+  </form>
+</div>
