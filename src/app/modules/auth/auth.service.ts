@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { AuthDto } from './dto/auth.dto';
 import jwt_decode from 'jwt-decode';
+import { TokenService } from '../shared/token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,17 +12,30 @@ import jwt_decode from 'jwt-decode';
 export class AuthService {
   constructor(
     private http: HttpClient,
-    private readonly cookieService: CookieService
+    private readonly cookieService: CookieService,
+    private readonly tokenService: TokenService
   ) {}
 
   public saveLoggedUser(user: AuthDto) {
-    this.cookieService.set('token', user.token);
+    this.tokenService.setToken(user.token);
     this.cookieService.set('userId', user.userId);
     this.cookieService.set('email', user.email);
   }
 
-  public getToken(): string {
-    return this.cookieService.get('token');
+  public getUserId(): string {
+    return this.cookieService.get('userId');
+  }
+
+  public getEmail(): string {
+    return this.cookieService.get('email');
+  }
+
+  public clearUserId(): void {
+    return this.cookieService.set('userId', '');
+  }
+
+  public clearEmail(): void {
+    return this.cookieService.set('email', '');
   }
 
   getTokenExpirationDate(token: string): Date | null {
@@ -52,9 +66,11 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const token = this.getToken();
-    const tokenValid = !this.isTokenExpired(token);
-    return tokenValid;
+    const token = this.tokenService.getToken();
+    if (token) {
+      return !this.isTokenExpired(token);
+    }
+    return false;
   }
 
   async login(email: string, password: string): Promise<boolean> {
