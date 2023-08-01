@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { environment } from 'src/environments/environment';
+import { User } from './interface/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,19 @@ export class UsersService {
       const result = await this.http
         .post<CreateUserDto>(`${environment.apiUrl}/users`, user)
         .toPromise();
+      return result;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async getUser(id: string) {
+    try {
+      const result = await this.http
+        .get<User>(`${environment.apiUrl}/users/${id}`)
+        .toPromise();
+
       return result;
     } catch (error) {
       console.error(error);
