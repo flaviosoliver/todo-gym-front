@@ -1,3 +1,4 @@
+import { ExercisesModule } from './modules/exercises/exercises.module';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,21 +19,35 @@ import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { TokenInterceptor } from './modules/shared/interceptor/token.interceptor';
+import { PlansModule } from './modules/plans/plans.module';
+import { CardsAreaComponent } from './pages/home/components/cards-area/cards-area.component';
+import { PlanCardComponent } from './components/plan-card/plan-card.component';
+import { NoPlanComponent } from './components/no-plan/no-plan.component';
 
 registerLocaleData(localePtBr);
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, NewUserComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    NewUserComponent,
+    CardsAreaComponent,
+    PlanCardComponent,
+    NoPlanComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     SharedModule,
     AuthModule,
+    PlansModule,
+    ExercisesModule,
   ],
   providers: [
     CookieService,
