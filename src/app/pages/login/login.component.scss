@@ -7,11 +7,6 @@
   display: flex;
   height: 100vh;
   flex-direction: column;
-  background-image: radial-gradient(
-    circle farthest-corner at 10% 20%,
-    rgb(139, 233, 195) 47.7%,
-    rgba(92, 202, 238) 93.6%
-  );
 
   .login-img {
     display: flex;

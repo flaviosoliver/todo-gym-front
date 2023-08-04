@@ -8,11 +8,6 @@
   height: 100vh;
   flex-direction: column;
   padding: 0 10px;
-  background-image: radial-gradient(
-    circle farthest-corner at 10% 20%,
-    rgb(139, 233, 195) 47.7%,
-    rgba(92, 202, 238) 93.6%
-  );
 
   .new-user-form,
   .new-user-form-shape-container {
