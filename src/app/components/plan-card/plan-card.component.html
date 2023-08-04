@@ -1,0 +1,45 @@
+<mat-card class="plan-card">
+  <mat-card-title class="mat-card-title-custom">
+    {{ name }}
+    <mat-card-actions class="mdc-card__actions-custom">
+      <button
+        matTooltip="Editar plano"
+        color="primary"
+        mat-icon-button
+        [attr.aria-label]="'Editar'"
+      >
+        <span class="material-icons"> edit_note </span>
+      </button>
+      <button
+        matTooltip="Realizar treino"
+        color="primary"
+        mat-icon-button
+        [attr.aria-label]="'Treinar'"
+      >
+        <span class="material-icons"> fitness_center </span>
+      </button>
+    </mat-card-actions>
+  </mat-card-title>
+  <mat-card-subtitle class="mat-mdc-card-subtitle-custom">
+    Válido até: {{ formatExpirationDate() }}
+  </mat-card-subtitle>
+  <mat-card-content>
+    <p>Foco do Treino: {{ focusMuscle }}</p>
+    <mat-accordion class="mat-accordion-custom" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Exercícios adicionados</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list role="list">
+          <mat-list-item
+            class="mdc-list-item-custom"
+            *ngFor="let exercise of training"
+            role="listitem"
+            >{{ exercise.exerciseName }}</mat-list-item
+          >
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>
