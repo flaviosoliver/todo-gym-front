@@ -1,0 +1,19 @@
+<div class="cards-area">
+  <mat-progress-spinner
+    class="custom-spinner"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+  <div *ngIf="(!plans || plans.length === 0) && !isLoading">
+    <app-no-plan></app-no-plan>
+  </div>
+  <div>
+    <app-plan-card
+      *ngFor="let plan of plans"
+      [name]="plan.name"
+      [focusMuscle]="plan.focusMuscle"
+      [expiresIn]="plan.expiresIn"
+      [training]="plan.training"
+    ></app-plan-card>
+  </div>
+</div>
