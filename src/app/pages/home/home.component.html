@@ -1,19 +1,29 @@
-<div class="className">
+<div class="home-container">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>To Do Gym</span>
       <span class="example-spacer"></span>
-      <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-      >
+      <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="routeTo('profile')">
+          <mat-icon color="accent" class="material-icons-filled">
+            person
+          </mat-icon>
+          <span class="menu-item-text">Meu Perfil</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon color="accent" class="material-icons-filled">
+            close
+          </mat-icon>
+          <span class="menu-item-text">Sair</span>
+        </button>
+      </mat-menu>
     </mat-toolbar-row>
 
     <mat-toolbar-row>
-      <span>Second Line</span>
+      <span>Olá, {{ user?.firstName }}!</span>
       <span class="example-spacer"></span>
       <button
         mat-icon-button
@@ -31,4 +41,7 @@
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
+  <div class="area-main">
+    <app-cards-area></app-cards-area>
+  </div>
 </div>
