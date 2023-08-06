@@ -8,4 +8,5 @@ export interface CreateUserDto {
   birthDate: string;
   active: boolean;
   shape: ShapeHistoryDto[];
+  avatar?: string;
 }

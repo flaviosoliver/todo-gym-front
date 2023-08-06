@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { environment } from 'src/environments/environment';
 import { User } from './interface/user.interface';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,19 @@ export class UsersService {
     try {
       const result = await this.http
         .get<User>(`${environment.apiUrl}/users/${id}`)
+        .toPromise();
+
+      return result;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async updateUser(id: string, user: UpdateUserDto) {
+    try {
+      const result = await this.http
+        .patch<UpdateUserDto>(`${environment.apiUrl}/users/${id}/update`, user)
         .toPromise();
 
       return result;
