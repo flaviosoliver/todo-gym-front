@@ -1,0 +1,8 @@
+<div class="avatar-list">
+  <div *ngFor="let avatar of avatarList" (click)="selectAvatar(avatar)">
+    <img
+      src="assets/avatar/{{ avatar }}"
+      [class.selected]="selectedAvatar === avatar"
+    />
+  </div>
+</div>

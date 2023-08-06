@@ -1,0 +1,25 @@
+@use "@angular/material" as mat;
+@import "../../../styles.scss";
+
+@include mat.core();
+
+.avatar-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-list div {
+  cursor: pointer;
+  margin: 5px;
+}
+
+.avatar-list img {
+  width: 70px;
+  border-radius: 50%;
+}
+
+.avatar-list img.selected {
+  border: 3px solid mat.get-color-from-palette($md-primary, 500);
+}

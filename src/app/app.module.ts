@@ -23,6 +23,8 @@ import { PlansModule } from './modules/plans/plans.module';
 import { CardsAreaComponent } from './pages/home/components/cards-area/cards-area.component';
 import { PlanCardComponent } from './components/plan-card/plan-card.component';
 import { NoPlanComponent } from './components/no-plan/no-plan.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { SelectAvatarComponent } from './components/select-avatar/select-avatar.component';
 
 registerLocaleData(localePtBr);
 
@@ -35,6 +37,8 @@ registerLocaleData(localePtBr);
     CardsAreaComponent,
     PlanCardComponent,
     NoPlanComponent,
+    ProfileComponent,
+    SelectAvatarComponent,
   ],
   imports: [
     BrowserModule,

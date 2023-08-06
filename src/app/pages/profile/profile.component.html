@@ -1,0 +1,147 @@
+<div class="profile-container">
+  <h2>Perfil de Usuário</h2>
+  <mat-progress-spinner
+    class="custom-spinner"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+  <form *ngIf="!isLoading" [formGroup]="userForm" class="profile-form">
+    <div class="profile-current-avatar">
+      <span
+        *ngIf="user.avatar === ''"
+        class="material-icons profile-avatar-icon"
+      >
+        account_circle
+      </span>
+      <img
+        class="profile-avatar-image"
+        *ngIf="user.avatar"
+        src="assets/avatar/{{ user.avatar }}"
+      />
+    </div>
+    <span class="profile-form-title">Nome:</span>
+    <input
+      type="text"
+      class="profile-form-element"
+      placeholder="nome"
+      formControlName="firstName"
+      required
+    />
+    <span
+      class="profile-form-text-invalid"
+      *ngIf="userForm.get('firstName')?.errors?.['required'] && userForm.get('firstName')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>Nome é obrigatório</span>
+    </span>
+    <span class="profile-form-title">Sobrenome:</span>
+    <input
+      type="text"
+      class="profile-form-element"
+      placeholder="sobrenome"
+      formControlName="lastName"
+      required
+    />
+    <span
+      class="profile-form-text-invalid"
+      *ngIf="userForm.get('lastName')?.errors?.['required'] && userForm.get('lastName')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>Sobrenome é obrigatório</span>
+    </span>
+    <span>Data de nascimento:</span>
+    <mat-form-field>
+      <input
+        formControlName="birthDate"
+        matInput
+        [matDatepicker]="birth"
+        readonly
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="birth"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #birth disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <mat-accordion class="mat-accordion-custom spacing width-limit" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Escolher novo avatar</mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-select-avatar
+          (avatarSelected)="onAvatarSelected($event)"
+        ></app-select-avatar>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <span class="profile-form-title-input">E-mail:</span>
+    <input
+      class="profile-form-element"
+      type="email"
+      placeholder="e-mail"
+      formControlName="email"
+      required
+    />
+    <span
+      class="profile-form-text-invalid"
+      *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>E-mail é obrigatório</span>
+    </span>
+    <span
+      class="profile-form-text-invalid"
+      *ngIf="userForm.get('email')?.errors?.['pattern'] && userForm.get('email')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>E-mail com formato inválido</span>
+    </span>
+    <mat-checkbox
+      (click)="handleActivePasswordInput()"
+      (change)="togglePasswordValidation()"
+      formControlName="alterPassword"
+    >
+      Deseja alterar senha atual?
+    </mat-checkbox>
+    <span class="profile-form-title-input">Senha:</span>
+    <span class="profile-form-password-container profile-form-element">
+      <input
+        class="profile-form-password-input"
+        [type]="hide ? 'password' : 'text'"
+        placeholder="senha"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Mostrar senha'"
+        [attr.aria-pressed]="hide"
+      >
+        <span class="material-icons-sharp">{{
+          hide ? "visibility_off" : "visibility"
+        }}</span>
+      </button>
+    </span>
+    <span
+      class="profile-form-text-invalid"
+      *ngIf="userForm.get('password')?.errors?.['pattern'] && userForm.get('password')?.touched"
+    >
+      <span><mat-icon>error_outline</mat-icon></span>
+      <span>Senha deve conter 6 dígitos ou mais</span>
+    </span>
+    <button
+      *ngIf="!isLoading"
+      class="btn-confirm profile-form-element"
+      type="submit"
+      [disabled]="!userForm!.valid"
+      (click)="saveEdit()"
+    >
+      Salvar
+    </button>
+    <mat-progress-spinner
+      class="custom-spinner"
+      *ngIf="isLoading"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+  </form>
+</div>
