@@ -349,6 +349,14 @@ body {
     color: mat.get-color-from-palette($md-accent, 500);
   }
 
+  .spacing {
+    margin-bottom: 15px;
+  }
+
+  .width-limit {
+    max-width: 295px;
+  }
+
   .custom-spinner {
     display: flex;
     align-self: center;
