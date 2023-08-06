@@ -39,6 +39,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate([route]);
   }
 
+  routeToProfile(userId: string) {
+    this.router.navigate(['profile', userId]);
+  }
+
   logout() {
     this.tokenService.clearToken();
     this.authService.clearUserId();

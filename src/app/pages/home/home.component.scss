@@ -1,3 +1,24 @@
-.example-spacer {
-  flex: 1 1 auto;
+.home-container {
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .profile-current-avatar {
+    cursor: pointer;
+
+    .profile-avatar-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 7px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      font-size: 32px;
+    }
+
+    .profile-avatar-image {
+      width: 36px;
+      margin-right: 7px;
+    }
+  }
 }

@@ -2,12 +2,12 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>To Do Gym</span>
-      <span class="example-spacer"></span>
+      <span class="spacer"></span>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="routeTo('profile')">
+        <button mat-menu-item (click)="routeToProfile(userId)">
           <mat-icon color="accent" class="material-icons-filled">
             person
           </mat-icon>
@@ -24,21 +24,20 @@
 
     <mat-toolbar-row>
       <span>Olá, {{ user?.firstName }}!</span>
-      <span class="example-spacer"></span>
-      <button
-        mat-icon-button
-        class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon"
-      >
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with share icon"
-      >
-        <mat-icon>share</mat-icon>
-      </button>
+      <span class="spacer"></span>
+      <a (click)="routeToProfile(userId)" class="profile-current-avatar">
+        <span
+          *ngIf="user && user.avatar === ''"
+          class="material-icons profile-avatar-icon"
+        >
+          account_circle
+        </span>
+        <img
+          class="profile-avatar-image"
+          *ngIf="user && user.avatar"
+          src="assets/avatar/{{ user.avatar }}"
+        />
+      </a>
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="area-main">
