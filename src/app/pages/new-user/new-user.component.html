@@ -89,6 +89,17 @@
         </div>
       </div>
     </div>
+    <mat-accordion class="mat-accordion-custom spacing width-limit" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Seu avatar</mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-select-avatar
+          (avatarSelected)="onAvatarSelected($event)"
+        ></app-select-avatar>
+      </mat-expansion-panel>
+    </mat-accordion>
+
     <span class="new-user-form-title-input">E-mail:</span>
     <input
       class="new-user-form-element"

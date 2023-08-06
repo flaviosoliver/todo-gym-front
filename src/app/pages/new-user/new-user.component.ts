@@ -15,6 +15,7 @@ export class NewUserComponent implements OnInit {
   userForm!: FormGroup;
   isLoading = false;
   hide: boolean = true;
+  selectedAvatar: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,6 +80,10 @@ export class NewUserComponent implements OnInit {
     }
   }
 
+  onAvatarSelected(avatar: string) {
+    this.selectedAvatar = avatar;
+  }
+
   async saveUser() {
     this.isLoading = true;
     const newUser: CreateUserDto = {
@@ -89,6 +94,7 @@ export class NewUserComponent implements OnInit {
       birthDate: this.userForm.get('birthDate')?.value,
       active: true,
       shape: this.userForm.get('shape')?.value as ShapeHistoryDto[],
+      avatar: this.selectedAvatar,
     };
 
     const user = await this.userService.createUser(newUser);
