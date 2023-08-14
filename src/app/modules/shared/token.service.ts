@@ -9,16 +9,22 @@ export class TokenService {
 
   private token: string | null = '';
 
-  setToken(token: string): void {
-    this.cookieService.set('token', token);
+  setToken(typeToken: string, token: string): void {
+    this.cookieService.set(typeToken, token);
   }
 
-  getToken(): string | null {
-    this.token = this.cookieService.get('token');
+  getToken(typeToken: string): string | null {
+    this.token = this.cookieService.get(typeToken);
     return this.token;
   }
 
-  clearToken(): void {
-    return this.cookieService.set('token', '');
+  clearTokens(): void {
+    this.cookieService.set('access_token', '');
+    this.cookieService.set('refresh_token', '');
+  }
+
+  updateTokens(tokens: any): void {
+    this.cookieService.set('access_token', tokens.accessToken);
+    this.cookieService.set('refresh_token', tokens.refreshToken.refreshToken);
   }
 }
