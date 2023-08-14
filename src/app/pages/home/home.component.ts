@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    this.tokenService.clearToken();
+    this.tokenService.clearTokens();
     this.authService.clearUserId();
     this.authService.clearEmail();
     window.location.reload();

@@ -25,6 +25,7 @@ import { PlanCardComponent } from './components/plan-card/plan-card.component';
 import { NoPlanComponent } from './components/no-plan/no-plan.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SelectAvatarComponent } from './components/select-avatar/select-avatar.component';
+import { ResponseInterceptor } from './modules/shared/interceptor/response.interceptor';
 
 registerLocaleData(localePtBr);
 
@@ -58,6 +59,11 @@ registerLocaleData(localePtBr);
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
