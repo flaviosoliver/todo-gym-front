@@ -1,15 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth/auth.service';
+import { User } from 'src/app/modules/users/interface/user.interface';
+import { TokenService } from '../../service/token.service';
 
 @Component({
   selector: 'app-bar-navigation',
   templateUrl: './bar-navigation.component.html',
-  styleUrls: ['./bar-navigation.component.scss']
+  styleUrls: ['./bar-navigation.component.scss'],
 })
 export class BarNavigationComponent implements OnInit {
+  @Input() user!: User;
+  @Input() isHome: boolean = false;
 
-  constructor() { }
+  constructor(
+    private readonly tokenService: TokenService,
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  routeTo(route: string) {
+    this.router.navigate([route]);
   }
 
+  routeToProfile(id: string) {
+    this.router.navigate(['profile', id]);
+  }
+
+  logout() {
+    this.tokenService.clearTokens();
+    this.authService.clearUserId();
+    this.authService.clearEmail();
+    window.location.reload();
+  }
 }

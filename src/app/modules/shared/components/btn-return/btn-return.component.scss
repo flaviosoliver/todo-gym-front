@@ -1,0 +1,17 @@
+@use "@angular/material" as mat;
+@import "../../../../../styles.scss";
+
+@include mat.core();
+
+.btn-return {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 20px;
+  background-color: mat.get-color-from-palette($md-secondary, 900);
+  color: #ffffff;
+  font-weight: 700;
+  width: 90px;
+  padding: 6px;
+  cursor: pointer;
+}

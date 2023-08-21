@@ -1,3 +1,65 @@
-<p>
-  bar-navigation works!
-</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>To Do Gym</span>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="routeToProfile(user.id)">
+        <mat-icon color="accent" class="material-icons-filled">
+          person
+        </mat-icon>
+        <span class="menu-item-text">Meu Perfil</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon color="accent" class="material-icons-filled">
+          timeline
+        </mat-icon>
+        <span class="menu-item-text">Evolução Física</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon color="accent" class="material-icons-filled">
+          history
+        </mat-icon>
+        <span class="menu-item-text">Histórico</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon color="accent" class="material-icons-filled">
+          fitness_center
+        </mat-icon>
+        <span class="menu-item-text">Planos de Treino</span>
+      </button>
+      <button (click)="routeTo('/exercises')" mat-menu-item>
+        <mat-icon color="accent" class="material-icons-filled">
+          receipt_long
+        </mat-icon>
+        <span class="menu-item-text">Banco de Exercícios</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon color="accent" class="material-icons-filled">
+          close
+        </mat-icon>
+        <span class="menu-item-text">Sair</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="isHome && user">
+    <span>Olá, {{ user.firstName }}!</span>
+    <span class="spacer"></span>
+    <a (click)="routeToProfile(user.id)" class="profile-current-avatar">
+      <span
+        *ngIf="user && user.avatar === ''"
+        class="material-icons profile-avatar-icon"
+      >
+        account_circle
+      </span>
+      <img
+        class="profile-avatar-image"
+        *ngIf="user && user.avatar"
+        src="assets/avatar/{{ user.avatar }}"
+      />
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>
