@@ -1,5 +1,9 @@
 export interface AuthDto {
   userId: string;
-  token: string;
+  accessToken: string;
   email: string;
+  refreshToken: {
+    refreshToken: string;
+    expiresIn: number;
+  };
 }

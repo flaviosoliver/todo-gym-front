@@ -1,10 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { AuthDto } from './dto/auth.dto';
 import jwt_decode from 'jwt-decode';
-import { TokenService } from '../shared/token.service';
+import { TokenService } from '../shared/service/token.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class AuthService {
   ) {}
 
   public saveLoggedUser(user: AuthDto) {
-    this.tokenService.setToken(user.token);
+    this.tokenService.setToken('access_token', user.accessToken);
+    this.tokenService.setToken('refresh_token', user.refreshToken.refreshToken);
     this.cookieService.set('userId', user.userId);
     this.cookieService.set('email', user.email);
   }
@@ -38,37 +40,10 @@ export class AuthService {
     return this.cookieService.set('email', '');
   }
 
-  getTokenExpirationDate(token: string): Date | null {
-    const decoded: any = jwt_decode(token);
-
-    if (decoded.exp === undefined) {
-      return null;
-    }
-
-    const date = new Date(0);
-    date.setUTCSeconds(decoded.exp);
-    return date;
-  }
-
-  isTokenExpired(token: string): boolean {
-    if (!token || token.length === 0) {
-      return true;
-    }
-
-    const date = this.getTokenExpirationDate(token);
-    if (date === undefined) {
-      return false;
-    }
-
-    const expired = date!.valueOf() < new Date().valueOf();
-
-    return expired;
-  }
-
   isLoggedIn(): boolean {
-    const token = this.tokenService.getToken();
-    if (token) {
-      return !this.isTokenExpired(token);
+    const accessToken = this.tokenService.getToken('access_token');
+    if (accessToken != null && accessToken != '') {
+      return true;
     }
     return false;
   }
@@ -80,10 +55,10 @@ export class AuthService {
         password: password,
       };
       const result = await this.http
-        .post<AuthDto>(`${environment.apiUrl}/auth`, body)
+        .post<AuthDto>(`${environment.apiUrl}/auth/login`, body)
         .toPromise();
 
-      if (result && result.token) {
+      if (result && result.accessToken) {
         this.saveLoggedUser(result);
         return true;
       }
@@ -92,5 +67,36 @@ export class AuthService {
       console.log(error);
       return false;
     }
+  }
+
+  async logout() {
+    return await this.http.post(`${environment.apiUrl}/auth/logout`, {});
+  }
+
+  refreshToken(): Observable<any> {
+    const accessToken = this.tokenService.getToken('access_token');
+    console.log(accessToken);
+    const refreshToken = this.tokenService.getToken('refresh_token');
+    console.log(refreshToken);
+
+    const body: AuthDto = {
+      accessToken: accessToken!,
+      userId: this.getUserId(),
+      email: this.getEmail(),
+      refreshToken: {
+        refreshToken: refreshToken!,
+        expiresIn: 0,
+      },
+    };
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${refreshToken}`),
+    };
+
+    return this.http.post<any>(
+      `${environment.apiUrl}/auth/refreshtoken`,
+      body,
+      header
+    );
   }
 }
