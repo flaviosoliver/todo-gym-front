@@ -21,10 +21,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { TokenInterceptor } from './modules/shared/interceptor/token.interceptor';
 import { PlansModule } from './modules/plans/plans.module';
 import { CardsAreaComponent } from './pages/home/components/cards-area/cards-area.component';
-import { PlanCardComponent } from './components/plan-card/plan-card.component';
-import { NoPlanComponent } from './components/no-plan/no-plan.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { SelectAvatarComponent } from './components/select-avatar/select-avatar.component';
+import { ExercisesListComponent } from './pages/exercises-list/exercises-list.component';
 
 registerLocaleData(localePtBr);
 
@@ -35,10 +33,8 @@ registerLocaleData(localePtBr);
     HomeComponent,
     NewUserComponent,
     CardsAreaComponent,
-    PlanCardComponent,
-    NoPlanComponent,
     ProfileComponent,
-    SelectAvatarComponent,
+    ExercisesListComponent,
   ],
   imports: [
     BrowserModule,

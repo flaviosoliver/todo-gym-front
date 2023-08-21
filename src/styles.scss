@@ -396,6 +396,70 @@ body {
   }
 }
 
+.mat-toolbar-row {
+  justify-content: space-between;
+}
+
+.snack-error {
+  .mdc-snackbar__surface {
+    padding-right: 0px;
+    border-radius: 20px !important;
+
+    .mat-mdc-snack-bar-label div app-snack-bar {
+      display: inline-flex;
+
+      span.mat-mdc-snack-bar-label.mdc-snackbar__label {
+        border-radius: 20px 0 0 20px;
+        background: mat.get-color-from-palette($todo-gym-front-warn, 500);
+        display: flex;
+        justify-content: center;
+        width: fit-content;
+        width: -moz-fit-content;
+      }
+    }
+  }
+}
+
+.snack-success {
+  .mdc-snackbar__surface {
+    padding-right: 0px;
+    border-radius: 20px !important;
+
+    .mat-mdc-snack-bar-label div app-snack-bar {
+      display: inline-flex;
+
+      span.mat-mdc-snack-bar-label.mdc-snackbar__label {
+        border-radius: 20px 0 0 20px;
+        background: mat.get-color-from-palette($todo-gym-front-success, 500);
+        display: flex;
+        justify-content: center;
+        width: fit-content;
+        width: -moz-fit-content;
+      }
+    }
+  }
+}
+
+.snack-info {
+  :host.mdc-snackbar__surface {
+    padding-right: 0px;
+    border-radius: 20px !important;
+
+    .mat-mdc-snack-bar-label div app-snack-bar {
+      display: inline-flex;
+
+      span.mat-mdc-snack-bar-label.mdc-snackbar__label {
+        border-radius: 20px 0 0 20px;
+        background: mat.get-color-from-palette($todo-gym-front-info, 500);
+        display: flex;
+        justify-content: center;
+        width: fit-content;
+        width: -moz-fit-content;
+      }
+    }
+  }
+}
+
 .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
   height: 15px;
 }
