@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async getUser(id: string) {
-    const user = await this.usersService.getUser(id);
+    const user = await this.usersService.getUser(id).toPromise();
 
     if (user) {
       this.user = user;
