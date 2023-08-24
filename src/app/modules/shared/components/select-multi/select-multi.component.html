@@ -1,0 +1,14 @@
+<form class="form-select-multi-custom" [formGroup]="myForm">
+  <ng-multiselect-dropdown
+    formControlName="option"
+    name="option"
+    [placeholder]="label"
+    [settings]="dropdownSettings"
+    [data]="optionsList"
+    (onSelect)="onItemSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+    (onDeSelect)="onItemDeSelect($event)"
+    (onDeSelectAll)="onDeSelectAll($event)"
+  >
+  </ng-multiselect-dropdown>
+</form>
