@@ -25,7 +25,8 @@ export class BarNavigationComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  routeToProfile(id: string) {
+  routeToProfile() {
+    let id = this.authService.getUserId();
     this.router.navigate(['profile', id]);
   }
 

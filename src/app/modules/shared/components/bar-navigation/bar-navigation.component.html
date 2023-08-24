@@ -1,12 +1,20 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>To Do Gym</span>
+    <span (click)="routeTo('')" class="ident-app">
+      <img
+        src="../../../assets/img/to-do_gym.svg"
+        class="login-img"
+        alt="To-do Gym"
+        width="32px"
+      />
+      To-Do Gym
+    </span>
     <span class="spacer"></span>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="routeToProfile(user.id)">
+      <button mat-menu-item (click)="routeToProfile()">
         <mat-icon color="accent" class="material-icons-filled">
           person
         </mat-icon>
@@ -48,7 +56,7 @@
   <mat-toolbar-row *ngIf="isHome && user">
     <span>Olá, {{ user.firstName }}!</span>
     <span class="spacer"></span>
-    <a (click)="routeToProfile(user.id)" class="profile-current-avatar">
+    <a (click)="routeToProfile()" class="profile-current-avatar">
       <span
         *ngIf="user && user.avatar === ''"
         class="material-icons profile-avatar-icon"
