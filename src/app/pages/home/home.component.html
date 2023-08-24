@@ -1,46 +1,6 @@
 <div class="home-container">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>To Do Gym</span>
-      <span class="spacer"></span>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="routeToProfile(userId)">
-          <mat-icon color="accent" class="material-icons-filled">
-            person
-          </mat-icon>
-          <span class="menu-item-text">Meu Perfil</span>
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon color="accent" class="material-icons-filled">
-            close
-          </mat-icon>
-          <span class="menu-item-text">Sair</span>
-        </button>
-      </mat-menu>
-    </mat-toolbar-row>
-
-    <mat-toolbar-row>
-      <span>Olá, {{ user?.firstName }}!</span>
-      <span class="spacer"></span>
-      <a (click)="routeToProfile(userId)" class="profile-current-avatar">
-        <span
-          *ngIf="user && user.avatar === ''"
-          class="material-icons profile-avatar-icon"
-        >
-          account_circle
-        </span>
-        <img
-          class="profile-avatar-image"
-          *ngIf="user && user.avatar"
-          src="assets/avatar/{{ user.avatar }}"
-        />
-      </a>
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <app-bar-navigation [user]="user!" [isHome]="true"> </app-bar-navigation>
   <div class="area-main">
-    <app-cards-area></app-cards-area>
+    <app-cards-area-home></app-cards-area-home>
   </div>
 </div>
