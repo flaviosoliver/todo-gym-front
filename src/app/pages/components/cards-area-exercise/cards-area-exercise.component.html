@@ -1,0 +1,33 @@
+<div class="area-header">
+  <app-search
+    placeholder="Pesquise pelo nome do exercício..."
+    (search)="handleSearch($event)"
+  >
+  </app-search>
+  <app-select-multi
+    class="select-multi"
+    label="Exercício focado em"
+    [optionsList]="focusMuscleList"
+    (selectedItems)="handleSelect($event)"
+  ></app-select-multi>
+</div>
+<div class="cards-area">
+  <mat-progress-spinner
+    class="custom-spinner"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+  <div *ngIf="(!exercises || exercises.length === 0) && !isLoading">
+    <app-no-exercise [isSearch]="isSearch"></app-no-exercise>
+  </div>
+  <div>
+    <app-exercise-card
+      *ngFor="let exercise of exercises"
+      [name]="exercise.name"
+      [focusMuscle]="exercise.focusMuscle"
+      [image]="exercise.image"
+      [video]="exercise.video"
+      [notes]="exercise.notes"
+    ></app-exercise-card>
+  </div>
+</div>
