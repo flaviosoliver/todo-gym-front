@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ExerciseItemComponent } from 'src/app/pages/components/exercise-item/exercise-item.component';
 
 @Component({
   selector: 'app-no-exercise',
@@ -7,8 +9,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NoExerciseComponent implements OnInit {
   @Input() isSearch: boolean = false;
+  @Output() reloadCards = new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ExerciseItemComponent, {});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    dialogRef.componentInstance.reloadCards.subscribe(() => {
+      window.location.reload();
+      dialogRef.close();
+    });
+  }
 }

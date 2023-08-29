@@ -1,0 +1,111 @@
+@use "@angular/material" as mat;
+@import "../../../../styles.scss";
+
+@include mat.core();
+
+.dialog-exercise {
+  display: flex;
+  height: 90vh;
+  flex-direction: column;
+  padding: 0 10px;
+  background-color: mat.get-color-from-palette($md-secondary, 100);
+
+  .btn-confirm {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    background-color: mat.get-color-from-palette($md-secondary, 900);
+    color: #ffffff;
+    font-weight: 700;
+    width: 90px;
+    padding: 6px;
+    cursor: pointer;
+  }
+
+  .btn-cancel {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    background-color: mat.get-color-from-palette($md-accent, 900);
+    color: #ffffff;
+    font-weight: 700;
+    width: 90px;
+    padding: 6px;
+    cursor: pointer;
+  }
+
+  .select-multi {
+    border: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .exercise-form {
+    display: flex;
+    flex-direction: column;
+    width: 236px;
+    margin: 0 auto;
+
+    .exercise-form-element {
+      margin-bottom: 15px;
+    }
+
+    input {
+      border: none;
+      border-radius: 20px;
+      padding: 10px;
+    }
+
+    .form-select-multi-custom {
+      background: #fff;
+      border-radius: 20px;
+    }
+
+    app-select-multi.select-multi {
+      padding-bottom: 10px;
+
+      form.form-select-multi-custom {
+        display: inline;
+        width: 100%;
+
+        ng-multiselect-dropdown {
+          div {
+            div:nth-child(1) {
+              span.dropdown-btn {
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .exercise-form-text-invalid {
+      color: mat.get-color-from-palette($md-warning, 500);
+      display: flex;
+      justify-content: center;
+      margin: -10px auto 10px auto;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+}
+
+::ng-deep {
+  .is-invalid {
+    .dropdown-btn {
+      border: 1px solid mat.get-color-from-palette($md-warning, 500) !important;
+    }
+  }
+  .multiselect-dropdown {
+    .dropdown-btn {
+      .selected-item {
+        &:hover {
+          box-shadow: 20px #5a5a5a !important;
+        }
+      }
+    }
+  }
+}

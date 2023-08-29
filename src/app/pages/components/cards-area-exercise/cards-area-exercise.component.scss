@@ -2,9 +2,11 @@
 @import "../../../../styles.scss";
 
 .cards-area {
-  padding: 10px;
+  padding: 10px 10px 50px 10px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .area-header {
@@ -19,5 +21,25 @@
     border: none;
     display: flex;
     justify-content: center;
+
+    form {
+      ng-multiselect-dropdown {
+        div.multiselect-dropdown {
+          div:nth-child(1) {
+            span.dropdown-btn {
+              width: 303px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .text-results {
+    padding-top: 10px;
+    color: #fff;
+    font-size: small;
+    justify-content: center;
+    display: flex;
   }
 }

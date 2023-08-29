@@ -3,14 +3,14 @@
     <p>Ainda não existem exercícios por aqui.</p>
     <p>
       Que tal
-      <a class="custom-link"> adicionar agora? </a>
+      <a class="custom-link" (click)="openDialog()"> adicionar agora? </a>
     </p>
   </mat-card-content>
   <mat-card-content *ngIf="isSearch">
-    <p>Não existe nenhum exercício com esses parâmetros buscados.</p>
+    <p>Não existem exercícios com esses parâmetros buscados.</p>
     <p>
       Deseja
-      <a class="custom-link"> criar um novo? </a>
+      <a class="custom-link" (click)="openDialog()"> adicionar agora? </a>
     </p>
   </mat-card-content>
 </mat-card>

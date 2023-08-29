@@ -1,0 +1,105 @@
+<div class="dialog-exercise">
+  <h1 mat-dialog-title>{{ label }}</h1>
+  <mat-dialog-content class="">
+    <mat-progress-spinner
+      class="custom-spinner"
+      *ngIf="isLoading"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+    <form *ngIf="!isLoading" [formGroup]="exerciseForm" class="exercise-form">
+      <span class="exercise-form-title">Nome:</span>
+      <input
+        type="text"
+        class="exercise-form-element"
+        placeholder="nome"
+        formControlName="name"
+        required
+      />
+      <span
+        class="exercise-form-text-invalid"
+        *ngIf="exerciseForm.get('name')?.errors?.['required'] && exerciseForm.get('name')?.touched"
+      >
+        <span><mat-icon>error_outline</mat-icon></span>
+        <span>Nome é obrigatório</span>
+      </span>
+      <ng-multiselect-dropdown
+        class="form-select-multi-custom"
+        [placeholder]="'Exercício focado em'"
+        [settings]="dropdownSettings"
+        [data]="focusMuscleList"
+        formControlName="focusMuscle"
+        [disabled]="false"
+        [class.is-invalid]="exerciseForm.get('focusMuscle')?.errors?.['required'] && exerciseForm.get('focusMuscle')?.touched"
+        (onFilterChange)="onFilterChange($event)"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelect)="onDeSelect($event)"
+        (onDeSelectAll)="onDeSelectAll($event)"
+        [(ngModel)]="selectedOptionsMuscles"
+      >
+      </ng-multiselect-dropdown>
+      <span
+        class="exercise-form-text-invalid"
+        *ngIf="exerciseForm.get('focusMuscle')?.errors?.['required'] && exerciseForm.get('focusMuscle')?.touched"
+      >
+        <span><mat-icon>error_outline</mat-icon></span>
+        <span>Escolha em que o exercício é focado</span>
+      </span>
+      <span class="exercise-form-title">Imagem:</span>
+      <input
+        type="url"
+        class="exercise-form-element"
+        placeholder="imagem"
+        formControlName="image"
+        required
+      />
+      <span
+        class="exercise-form-text-invalid"
+        *ngIf="exerciseForm.get('image')?.errors?.['pattern'] && exerciseForm.get('image')?.touched"
+      >
+        <span><mat-icon>error_outline</mat-icon></span>
+        <span>
+          O link deve apontar para um arquivo de imagem válido ( jpg | jpeg |
+          png | gif | webp | svg )
+        </span>
+      </span>
+      <span class="exercise-form-title">Vídeo:</span>
+      <input
+        type="url"
+        class="exercise-form-element"
+        placeholder="vídeo"
+        formControlName="video"
+        required
+      />
+      <span
+        class="exercise-form-text-invalid"
+        *ngIf="exerciseForm.get('video')?.errors?.['pattern'] && exerciseForm.get('video')?.touched"
+      >
+        <span><mat-icon>error_outline</mat-icon></span>
+        <span>O link deve apontar para um vídeo no YouTube</span>
+      </span>
+      <span class="exercise-form-title">Anotações:</span>
+      <input
+        type="text"
+        class="exercise-form-element"
+        placeholder="anotações"
+        formControlName="notes"
+        required
+      />
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button class="btn-cancel" mat-button (click)="onCloseClick()">
+      Fechar
+    </button>
+    <button
+      class="btn-confirm"
+      mat-button
+      [mat-dialog-close]="true"
+      type="submit"
+      (click)="save()"
+    >
+      Salvar
+    </button>
+  </mat-dialog-actions>
+</div>

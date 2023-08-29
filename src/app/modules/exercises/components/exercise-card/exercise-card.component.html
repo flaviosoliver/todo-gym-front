@@ -1,0 +1,44 @@
+<mat-card class="exercise-card">
+  <mat-card-title class="mat-card-title-custom">
+    {{ name }}
+    <mat-card-actions class="mdc-card__actions-custom">
+      <button
+        matTooltip="Editar exercício"
+        color="primary"
+        mat-icon-button
+        [attr.aria-label]="'Editar'"
+        (click)="openDialog()"
+      >
+        <span class="material-icons"> edit </span>
+      </button>
+    </mat-card-actions>
+  </mat-card-title>
+  <mat-card-subtitle class="mat-mdc-card-subtitle-custom">
+    {{ focusMuscle }}
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="exercise-image-container" *ngIf="image">
+      <img
+        class="exercise-image"
+        mat-card-image
+        src="{{ image }}"
+        alt="{{ name }}"
+      />
+    </div>
+    <mat-accordion *ngIf="video" class="mat-accordion-custom" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Vídeo Demonstrativo</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="exercise-video">
+          <youtube-player
+            [videoId]="videoId"
+            [height]="260"
+            [width]="260"
+          ></youtube-player>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <p>{{ notes }}</p>
+  </mat-card-content>
+</mat-card>

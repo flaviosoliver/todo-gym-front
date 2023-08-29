@@ -3,7 +3,7 @@ import { ExercisesService } from 'src/app/modules/exercises/exercises.service';
 import { Exercise } from 'src/app/modules/exercises/interface/exercise.interface';
 import { FocusEnum } from 'src/app/modules/shared/enums/focus.enum';
 import { SnackBarTypeEnum } from 'src/app/modules/shared/enums/snack-bar-type.enum';
-import { ParamsDto } from 'src/app/modules/shared/interface/params.dto';
+import { ParamsDto } from 'src/app/modules/shared/dto/params.dto';
 import { SnackBarCustomService } from 'src/app/modules/shared/service/snack-bar-custom.service';
 import { buildParams } from 'src/app/modules/shared/utils/http-params.utils';
 
@@ -37,7 +37,7 @@ export class CardsAreaExerciseComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    await this.getAllExercises();
+    await this.reloadList();
   }
 
   async handleSearch(term: string) {
@@ -99,5 +99,13 @@ export class CardsAreaExerciseComponent implements OnInit {
     const result = await this.exercisesService.getByParams(params).toPromise();
     this.isLoading = false;
     return (this.exercises = result && result.length > 0 ? result : []);
+  }
+
+  async reloadList() {
+    const params = {
+      name: '',
+      focusMuscle: [],
+    };
+    await this.findExercises(params);
   }
 }

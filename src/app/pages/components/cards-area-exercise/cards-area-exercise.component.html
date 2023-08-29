@@ -8,8 +8,14 @@
     class="select-multi"
     label="Exercício focado em"
     [optionsList]="focusMuscleList"
-    (selectedItems)="handleSelect($event)"
+    [itemsShowLimit]="2"
+    (selectedItemsChange)="handleSelect($event)"
   ></app-select-multi>
+  <span *ngIf="!isLoading" class="text-results">{{
+    exercises.length > 1 || exercises.length === 0
+      ? exercises.length + " Resultados"
+      : exercises.length + " Resultado"
+  }}</span>
 </div>
 <div class="cards-area">
   <mat-progress-spinner
@@ -18,16 +24,21 @@
     mode="indeterminate"
   ></mat-progress-spinner>
   <div *ngIf="(!exercises || exercises.length === 0) && !isLoading">
-    <app-no-exercise [isSearch]="isSearch"></app-no-exercise>
+    <app-no-exercise
+      (reloadCards)="reloadList()"
+      [isSearch]="isSearch"
+    ></app-no-exercise>
   </div>
-  <div>
+  <div *ngIf="!isLoading">
     <app-exercise-card
       *ngFor="let exercise of exercises"
+      [exercise]="exercise"
       [name]="exercise.name"
       [focusMuscle]="exercise.focusMuscle"
       [image]="exercise.image"
       [video]="exercise.video"
       [notes]="exercise.notes"
+      (reloadCards)="reloadList()"
     ></app-exercise-card>
   </div>
 </div>

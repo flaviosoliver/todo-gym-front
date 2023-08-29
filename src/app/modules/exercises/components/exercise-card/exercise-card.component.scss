@@ -1,0 +1,24 @@
+.exercise-card {
+  margin-bottom: 10px;
+  border-radius: 20px;
+  max-width: 340px;
+
+  .mat-accordion-custom .exercise-video {
+    max-width: 260px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mat-mdc-card-content {
+    .exercise-image-container {
+      padding-bottom: 10px;
+
+      .exercise-image {
+        max-width: 290px;
+        border-radius: 20px;
+        display: flex;
+        margin: 0 auto;
+      }
+    }
+  }
+}

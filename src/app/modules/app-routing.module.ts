@@ -7,6 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 import { NewUserComponent } from '../pages/new-user/new-user.component';
 import { LoggedGuard } from './auth/guard/logged.guard';
 import { ProfileComponent } from '../pages/profile/profile.component';
+import { ExercisesListComponent } from '../pages/exercises-list/exercises-list.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,12 @@ const routes: Routes = [
   {
     path: 'profile/:userId',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'exercises',
+    component: ExercisesListComponent,
+    children: [{ path: '', component: ExercisesListComponent }],
     canActivate: [AuthGuard],
   },
   {

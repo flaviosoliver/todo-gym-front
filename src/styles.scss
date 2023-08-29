@@ -260,6 +260,7 @@ $todo-gym-front-theme: mat.define-light-theme(
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -320,8 +321,8 @@ body {
   margin: 0 auto;
   background-image: radial-gradient(
     circle farthest-corner at 10% 20%,
-    rgb(139, 233, 195) 47.7%,
-    rgba(92, 202, 238) 93.6%
+    #6aa5a5 47.7%,
+    #5ccaee 93.6%
   );
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -347,6 +348,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     color: mat.get-color-from-palette($md-accent, 500);
+    cursor: pointer;
   }
 
   .spacing {
@@ -367,7 +369,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 0;
+    padding-bottom: 4px;
+
+    .mat-card-title-custom-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
   }
 
   .mdc-card__actions-custom {
@@ -394,6 +402,35 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
+
+  iframe {
+    border-radius: 20px;
+  }
+}
+
+span.dropdown-btn {
+  border: none !important;
+  width: -webkit-fill-available !important;
+  width: -moz-fill-available !important;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
+  border: none !important;
+  background: mat.get-color-from-palette($md-primary, 500) !important;
+  border-radius: 20px !important;
+}
+
+.multiselect-item-checkbox input[type="checkbox"]:checked + div:before {
+  background: mat.get-color-from-palette($md-primary, 500) !important;
+}
+
+.multiselect-item-checkbox input[type="checkbox"] + div:before {
+  color: mat.get-color-from-palette($md-primary, 500) !important;
+  border-color: mat.get-color-from-palette($md-primary, 500) !important;
+}
+
+.dropdown-list .filter-textbox input {
+  width: auto !important;
 }
 
 .mat-toolbar-row {
@@ -413,8 +450,8 @@ body {
         background: mat.get-color-from-palette($todo-gym-front-warn, 500);
         display: flex;
         justify-content: center;
-        width: fit-content;
-        width: -moz-fit-content;
+        width: 79vw;
+        align-items: center;
       }
     }
   }
@@ -433,8 +470,8 @@ body {
         background: mat.get-color-from-palette($todo-gym-front-success, 500);
         display: flex;
         justify-content: center;
-        width: fit-content;
-        width: -moz-fit-content;
+        width: 79vw;
+        align-items: center;
       }
     }
   }
@@ -453,11 +490,15 @@ body {
         background: mat.get-color-from-palette($todo-gym-front-info, 500);
         display: flex;
         justify-content: center;
-        width: fit-content;
-        width: -moz-fit-content;
+        width: 79vw;
+        align-items: center;
       }
     }
   }
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  border-radius: 20px !important;
 }
 
 .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {

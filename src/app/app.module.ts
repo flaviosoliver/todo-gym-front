@@ -20,9 +20,12 @@ import localePtBr from '@angular/common/locales/pt';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { TokenInterceptor } from './modules/shared/interceptor/token.interceptor';
 import { PlansModule } from './modules/plans/plans.module';
-import { CardsAreaComponent } from './pages/home/components/cards-area/cards-area.component';
+import { CardsAreaHomeComponent } from './pages/home/components/cards-area-home/cards-area-home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ExercisesListComponent } from './pages/exercises-list/exercises-list.component';
+import { CardsAreaExerciseComponent } from './pages/components/cards-area-exercise/cards-area-exercise.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ExerciseItemComponent } from './pages/components/exercise-item/exercise-item.component';
 
 registerLocaleData(localePtBr);
 
@@ -32,9 +35,11 @@ registerLocaleData(localePtBr);
     LoginComponent,
     HomeComponent,
     NewUserComponent,
-    CardsAreaComponent,
+    CardsAreaHomeComponent,
     ProfileComponent,
     ExercisesListComponent,
+    CardsAreaExerciseComponent,
+    ExerciseItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ registerLocaleData(localePtBr);
     AuthModule,
     PlansModule,
     ExercisesModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [
     CookieService,
