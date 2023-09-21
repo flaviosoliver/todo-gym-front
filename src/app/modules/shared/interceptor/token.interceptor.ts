@@ -35,8 +35,6 @@ export class TokenInterceptor implements HttpInterceptor {
     let authReq = request;
     const accessToken = this.tokenService.getToken('access_token');
 
-    console.log(`token: ${accessToken}`);
-
     if (
       accessToken !== null &&
       accessToken !== undefined &&
@@ -45,21 +43,17 @@ export class TokenInterceptor implements HttpInterceptor {
     ) {
       authReq = this.addTokenHeader(request, accessToken);
     }
-    console.log(authReq);
 
     return next.handle(authReq).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          console.log(err);
           if (err.error.message === 'Token Expired') {
-            console.log('fazendo refresh');
             const refreshToken = this.tokenService.getToken('refresh_token');
             if (refreshToken !== null && !this.isRefreshing) {
               const isRefreshTokenExpired =
                 this.tokenService.isTokenExpired(refreshToken);
 
               if (isRefreshTokenExpired) {
-                console.log('fazendo logout');
                 this.tokenService.clearTokens();
                 this.authService.clearUserId();
                 this.authService.clearEmail();
@@ -69,7 +63,6 @@ export class TokenInterceptor implements HttpInterceptor {
                 return this.generateNewTokens(request, next);
               }
             } else {
-              console.log('fazendo logout');
               this.tokenService.clearTokens();
               this.authService.clearUserId();
               this.authService.clearEmail();
@@ -101,11 +94,8 @@ export class TokenInterceptor implements HttpInterceptor {
     this.isRefreshing = true;
     this.refreshTokenSubject.next(null);
 
-    console.log(request);
-
     return this.authService.refreshToken().pipe(
       switchMap((res: any) => {
-        console.log(res);
         this.tokenService.setToken('access_token', res.accessToken);
         this.tokenService.setToken(
           'refresh_token',
