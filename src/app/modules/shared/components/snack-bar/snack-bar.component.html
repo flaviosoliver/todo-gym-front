@@ -3,7 +3,7 @@
   {{ data.message }}
 </span>
 <span matSnackBarActions>
-  <button mat-button matSnackBarAction (click)="closeSnackbar()">
+  <button mat-button matSnackBarAction (click)="snackBarRef.dismiss()">
     <mat-icon color="accent" class="material-icons-filled"> close </mat-icon>
   </button>
 </span>

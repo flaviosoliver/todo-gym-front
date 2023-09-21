@@ -7,7 +7,7 @@ import { SnackBarTypeEnum } from '../enums/snack-bar-type.enum';
   providedIn: 'root',
 })
 export class SnackBarCustomService {
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(public snackBar: MatSnackBar) {}
 
   public open(
     message: string,
