@@ -5,7 +5,7 @@ export interface Training {
   repetitions: string;
   load: string;
   notes: string;
-  done: true;
+  done: boolean;
   exerciseName?: string;
   exerciseImage?: string;
   exerciseVideo?: string;
