@@ -1,0 +1,221 @@
+@use "@angular/material" as mat;
+@import "../../../../../styles.scss";
+
+@include mat.core();
+
+.area-main {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  padding: 0 10px;
+
+  .plan-form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    width: -moz-fit-content;
+    margin: 0 auto;
+
+    .select-multi {
+      border: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-select-multi-custom-1,
+    .form-select-multi-custom-2 {
+      background: #fff;
+      border-radius: 20px;
+      margin-bottom: 15px;
+    }
+
+    // app-select-multi.select-multi {
+    //   padding-bottom: 10px;
+
+    //   form.form-select-multi-custom {
+    //     display: inline;
+    //     width: 100%;
+
+    //     ng-multiselect-dropdown {
+    //       div {
+    //         div:nth-child(1) {
+    //           span.dropdown-btn {
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    .btn-area {
+      display: flex;
+      justify-content: space-evenly;
+
+      .btn-confirm {
+        display: flex;
+        align-items: center;
+        color: mat.get-color-from-palette($md-primary, 500);
+        font-weight: 700;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+          background-position: right center;
+          box-shadow: 0 0 20px #eee;
+          color: #fff;
+        }
+      }
+
+      .btn-cancel {
+        display: flex;
+        align-items: center;
+        border: none;
+        border-radius: 20px;
+        color: mat.get-color-from-palette($md-primary, 500);
+        background-image: linear-gradient(135deg, #78919c 10%, #abe1ff 100%);
+        transition: 0.5s;
+        background-size: 200% auto;
+        font-weight: 700;
+        width: 90px;
+        padding: 6px;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+          background-position: right center;
+          box-shadow: 0 0 20px #eee;
+          color: #fff;
+        }
+      }
+    }
+
+    .exercise-existis {
+      .card {
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 15px;
+
+        .mat-accordion {
+          width: 84%;
+        }
+
+        .exercise-order {
+          display: flex;
+          justify-content: space-evenly;
+          .remove-exercise {
+            width: 35px;
+            height: 35px;
+            align-self: center;
+            margin: 0;
+          }
+        }
+
+        .exercise-name {
+          margin-bottom: 15px;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        .card-body {
+          display: flex;
+          column-gap: 15px;
+          flex-wrap: wrap;
+          justify-content: space-around;
+
+          .exercise-attributes {
+            display: grid;
+
+            input {
+              width: 80px;
+              border: 1px solid mat.get-color-from-palette($md-primary, 500);
+            }
+
+            textarea {
+              border: 1px solid mat.get-color-from-palette($md-primary, 500);
+            }
+          }
+
+          .notes {
+            width: -webkit-fill-available;
+          }
+        }
+      }
+    }
+
+    .btn-action-1,
+    .btn-action-2 {
+      width: fit-content;
+      width: -moz-fit-content;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    .exercises-area,
+    .training-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input,
+    textarea {
+      border: none;
+      border-radius: 20px;
+      padding: 10px;
+    }
+
+    .plan-form-element {
+      margin-bottom: 15px;
+    }
+
+    .plan-form-text-invalid {
+      color: mat.get-color-from-palette($md-warning, 500);
+      display: flex;
+      justify-content: center;
+      margin: -10px auto 10px auto;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+
+  .title-accordion {
+    text-overflow: ellipsis;
+  }
+}
+
+::ng-deep {
+  .is-invalid {
+    .dropdown-btn {
+      border: 1px solid mat.get-color-from-palette($md-warning, 500) !important;
+    }
+  }
+  .multiselect-dropdown {
+    .dropdown-btn {
+      .selected-item {
+        &:hover {
+          box-shadow: 20px #5a5a5a !important;
+        }
+      }
+    }
+  }
+
+  .mat-expansion-panel
+    .mat-expansion-panel-content
+    .mat-expansion-panel-body
+    .ng-select {
+    max-width: 250px;
+
+    .ng-select-container {
+      border-radius: 20px;
+      border-color: mat.get-color-from-palette($md-primary, 500);
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.exercise-image {
+  max-width: 290px;
+  border-radius: 20px;
+  display: flex;
+  margin: 0 auto;
+}

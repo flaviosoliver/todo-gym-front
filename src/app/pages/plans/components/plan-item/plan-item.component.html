@@ -1,0 +1,178 @@
+<div class="plan-container">
+  <app-bar-navigation [isHome]="false"> </app-bar-navigation>
+  <div class="area-main">
+    <h2 mat-dialog-title>{{ label }}</h2>
+    <mat-progress-spinner
+      class="custom-spinner"
+      *ngIf="isLoading"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+    <form class="plan-form" *ngIf="!isLoading" [formGroup]="planForm">
+      <span class="plan-form-title">Nome do Plano:</span>
+      <input
+        type="text"
+        formControlName="name"
+        class="plan-form-element"
+        placeholder="nome do plano"
+        required
+      />
+
+      <span class="plan-form-title">Músculos Alvo:</span>
+      <ng-multiselect-dropdown
+        class="form-select-multi-custom-1"
+        [placeholder]="'plano focado em'"
+        [settings]="dropdownSettings"
+        [data]="focusMuscleList"
+        formControlName="focusMuscle"
+        [disabled]="false"
+        [class.is-invalid]="planForm.get('focusMuscle')?.errors?.['required'] && planForm.get('focusMuscle')?.touched"
+        (onFilterChange)="onFilterChange($event)"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelect)="onDeSelect($event)"
+        (onDeSelectAll)="onDeSelectAll($event)"
+        [(ngModel)]="selectedOptionsMuscles"
+      >
+      </ng-multiselect-dropdown>
+
+      <span class="plan-form-title">Data de Expiração:</span>
+      <mat-form-field>
+        <input
+          formControlName="expiresIn"
+          placeholder="data de expiração"
+          matInput
+          [matDatepicker]="expiresIn"
+          required
+          readonly
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="expiresIn"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #expiresIn disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+      <div class="exercise-existis" *ngIf="canViewExercises">
+        <span class="plan-form-title">Exercícios:</span>
+        <ng-container
+          formArrayName="training"
+          *ngFor="let exercise of trainingGroup; let i = index"
+        >
+          <div class="card" [formGroupName]="i">
+            <mat-accordion multi class="mat-accordion-custom">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <span>{{ i + 1 }}. </span>
+                    <input
+                      type="text"
+                      formControlName="exerciseName"
+                      value="exerciseName"
+                      readonly
+                      class="title-accordion"
+                    />
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <label for="exerciseName" class="plan-form-title"
+                  >Nome do Exercício:</label
+                >
+
+                <ng-select
+                  [items]="exercises"
+                  bindLabel="name"
+                  bindValue="id"
+                  [loading]="isLoading"
+                  [searchFn]="customSearch"
+                  formControlName="exerciseId"
+                >
+                  <ng-template ng-option-tmp let-item="item">
+                    {{ item.name }} <br />
+                    <small>{{ item.focusMuscle.join(" | ") }}</small>
+                  </ng-template>
+                </ng-select>
+
+                <div class="card-body">
+                  <div class="exercise-attributes">
+                    <label for="series" class="plan-form-title">Séries:</label>
+                    <input
+                      type="text"
+                      id="series"
+                      placeholder="séries"
+                      class="plan-form-element"
+                      formControlName="series"
+                    />
+                  </div>
+                  <div class="exercise-attributes">
+                    <label for="repetitions" class="plan-form-title"
+                      >Repetições:</label
+                    >
+                    <input
+                      type="text"
+                      id="repetitions"
+                      placeholder="repetições"
+                      class="plan-form-element"
+                      formControlName="repetitions"
+                    />
+                  </div>
+                  <div class="exercise-attributes">
+                    <label for="load" class="plan-form-title"
+                      >Peso/Carga:</label
+                    >
+                    <input
+                      type="text"
+                      id="load"
+                      placeholder="peso/carga"
+                      class="plan-form-element"
+                      formControlName="load"
+                    />
+                  </div>
+                  <div class="exercise-attributes notes">
+                    <label for="notes" class="plan-form-title"
+                      >Observações:</label
+                    >
+                    <textarea
+                      id="notes"
+                      placeholder="observações"
+                      class="plan-form-element"
+                      formControlName="notes"
+                    ></textarea>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+            <div class="exercise-order">
+              <button
+                type="button"
+                class="btn-action-2 remove-exercise"
+                (click)="removeExercise(i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <button type="button" class="btn-action-1" (click)="addExercise()">
+        Adicionar exercício
+      </button>
+      <div class="btn-area">
+        <button
+          type="submit"
+          class="btn-cancel"
+          mat-button
+          (click)="onCancelClick()"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn-confirm"
+          mat-button
+          (click)="onSubmit()"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

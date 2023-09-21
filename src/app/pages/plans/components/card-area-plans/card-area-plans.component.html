@@ -1,0 +1,46 @@
+<div class="area-header">
+  <app-search
+    placeholder="Pesquise pelo nome do plano..."
+    (search)="handleSearch($event)"
+  >
+  </app-search>
+  <app-select-multi
+    class="select-multi"
+    label="Plano focado em"
+    [optionsList]="focusMuscleList"
+    [itemsShowLimit]="2"
+    (selectedItemsChange)="handleSelect($event)"
+  ></app-select-multi>
+  <div class="container-expired" *ngIf="haveExpires">
+    <span class="">{{ count }} com Validade Expirada</span>
+    <button (click)="routeTo('plans/expires')" class="btn-custom">
+      Ver Expirados
+    </button>
+  </div>
+</div>
+<div class="cards-area">
+  <mat-progress-spinner
+    class="custom-spinner"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+  <div *ngIf="(!plans || plans.length === 0) && !isLoading">
+    <app-no-plan
+      (reloadCards)="reloadList()"
+      [isSearch]="isSearch"
+      [count]="count"
+    ></app-no-plan>
+  </div>
+  <div>
+    <ng-container *ngFor="let plan of plans">
+      <app-plan-card
+        [disableExpiration]="true"
+        [id]="plan.id"
+        [name]="plan.name"
+        [focusMuscle]="plan.focusMuscle"
+        [expiresIn]="plan.expiresIn"
+        [training]="plan.training"
+      ></app-plan-card>
+    </ng-container>
+  </div>
+</div>

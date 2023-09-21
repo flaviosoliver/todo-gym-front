@@ -7,10 +7,12 @@
         color="primary"
         mat-icon-button
         [attr.aria-label]="'Editar'"
+        (click)="routeTo(id)"
       >
         <span class="material-icons"> edit_note </span>
       </button>
       <button
+        *ngIf="isHomePage"
         matTooltip="Realizar treino"
         color="primary"
         mat-icon-button
@@ -32,12 +34,11 @@
         </mat-expansion-panel-header>
 
         <mat-list role="list">
-          <mat-list-item
-            class="mdc-list-item-custom"
-            *ngFor="let exercise of training"
-            role="listitem"
-            >{{ exercise.exerciseName }}</mat-list-item
-          >
+          <ng-container *ngFor="let exercise of training">
+            <mat-list-item class="mdc-list-item-custom" role="listitem">{{
+              exercise.exerciseName
+            }}</mat-list-item>
+          </ng-container>
         </mat-list>
       </mat-expansion-panel>
     </mat-accordion>

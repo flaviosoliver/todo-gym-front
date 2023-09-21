@@ -1,9 +1,26 @@
 <mat-card class="plan-card-empty">
-  <mat-card-content>
-    <p>Você ainda não possui planos de exercícios.</p>
+  <mat-card-content *ngIf="count < 1">
+    <p>Você ainda não possui planos de treino.</p>
     <p>
       Que tal
       <a class="custom-link"> criar agora? </a>
+    </p>
+  </mat-card-content>
+</mat-card>
+<mat-card class="plan-card-empty">
+  <mat-card-content *ngIf="count > 0">
+    <p>
+      Você possui {{ count }} planos de treino, mas todos eles têm prazos de
+      validade expirados. Você pode criar novos ou renovar a validade dos
+      vencidos.
+    </p>
+    <p>
+      Deseja
+      <a class="custom-link"> criar um novo agora? </a>
+    </p>
+    <p>
+      Ou
+      <a class="custom-link" (click)="routeTo('/plans')"> avaliar vencidos? </a>
     </p>
   </mat-card-content>
 </mat-card>
