@@ -10,6 +10,14 @@
       To-Do Gym
     </span>
     <span class="spacer"></span>
+    <button
+      mat-icon-button
+      (click)="toggleTheme()"
+      class="theme-toggle"
+      aria-label="Toggle Dark Theme"
+    >
+      <mat-icon>{{ isDark() ? "dark_mode" : "light_mode" }}</mat-icon>
+    </button>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>
     </button>
@@ -32,7 +40,7 @@
         </mat-icon>
         <span class="menu-item-text">Histórico</span>
       </button>
-      <button mat-menu-item>
+      <button (click)="routeTo('/plans')" mat-menu-item>
         <mat-icon color="accent" class="material-icons-filled">
           fitness_center
         </mat-icon>

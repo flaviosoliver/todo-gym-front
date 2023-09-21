@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { User } from 'src/app/modules/users/interface/user.interface';
 import { TokenService } from '../../service/token.service';
+import { ThemeService } from '../../service/theme.service';
 
 @Component({
   selector: 'app-bar-navigation',
@@ -16,7 +17,8 @@ export class BarNavigationComponent implements OnInit {
   constructor(
     private readonly tokenService: TokenService,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {}
@@ -35,5 +37,13 @@ export class BarNavigationComponent implements OnInit {
     this.authService.clearUserId();
     this.authService.clearEmail();
     window.location.reload();
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
+  isDark() {
+    return this.themeService.isDark();
   }
 }
