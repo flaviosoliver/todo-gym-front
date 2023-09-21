@@ -15,7 +15,7 @@ import { ExercisesService } from 'src/app/modules/exercises/exercises.service';
 import { Exercise } from 'src/app/modules/exercises/interface/exercise.interface';
 import { FocusEnum } from 'src/app/modules/shared/enums/focus.enum';
 import { SnackBarTypeEnum } from 'src/app/modules/shared/enums/snack-bar-type.enum';
-import { SelectMulti } from 'src/app/modules/shared/interface/select-multi';
+import { Select } from 'src/app/modules/shared/interface/select';
 import { SnackBarCustomService } from 'src/app/modules/shared/service/snack-bar-custom.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class ExerciseItemComponent implements OnInit {
   @Input() exercise?: Exercise;
   @Output() reloadCards = new EventEmitter<boolean>();
   label: string = '';
-  focusMuscleList: SelectMulti[] = [
+  focusMuscleList: Select[] = [
     { id: 1, text: FocusEnum.ABS },
     { id: 2, text: FocusEnum.AEROBIC },
     { id: 3, text: FocusEnum.FOREARM },
@@ -42,7 +42,7 @@ export class ExerciseItemComponent implements OnInit {
   ];
   selectedOptionsMuscles: any[] = [];
   dropdownSettings: IDropdownSettings = {};
-  selectDefault: SelectMulti[] = [];
+  selectDefault: Select[] = [];
   exerciseForm: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
     focusMuscle: [[], [Validators.required]],
@@ -72,7 +72,7 @@ export class ExerciseItemComponent implements OnInit {
     console.log(this.exercise);
     this.dropdownSettings = {
       singleSelection: false,
-      defaultOpen: true,
+      defaultOpen: false,
       idField: 'id',
       textField: 'text',
       selectAllText: 'Selecionar Todos',
@@ -192,7 +192,7 @@ export class ExerciseItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSelectedItemsChange(selectedItems: string[]): SelectMulti[] {
+  onSelectedItemsChange(selectedItems: string[]): Select[] {
     const res = this.focusMuscleList.filter((item) =>
       selectedItems.includes(item.text)
     );
@@ -241,7 +241,7 @@ export class ExerciseItemComponent implements OnInit {
   convertValues() {
     const output: string[] = [];
     const values = this.exerciseForm.get('focusMuscle')?.value;
-    values.forEach((item: SelectMulti) => output.push(item.text));
+    values.forEach((item: Select) => output.push(item.text));
     return output;
   }
 }

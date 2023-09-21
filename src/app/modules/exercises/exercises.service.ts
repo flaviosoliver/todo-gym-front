@@ -44,6 +44,7 @@ export class ExercisesService {
   }
 
   getByParams(params: ParamsDto): Observable<Exercise[]> {
+    console.log(params);
     const result = this.http
       .get<Exercise[]>(`${environment.apiUrl}/exercises/search`, {
         params: buildParams(params),

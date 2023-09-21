@@ -1,5 +1,5 @@
 <div class="dialog-exercise">
-  <h1 mat-dialog-title>{{ label }}</h1>
+  <h2 mat-dialog-title>{{ label }}</h2>
   <mat-dialog-content class="">
     <mat-progress-spinner
       class="custom-spinner"
@@ -23,8 +23,8 @@
         <span>Nome é obrigatório</span>
       </span>
       <ng-multiselect-dropdown
-        class="form-select-multi-custom"
-        [placeholder]="'Exercício focado em'"
+        class="form-select-multi-custom-1"
+        [placeholder]="'exercício focado em'"
         [settings]="dropdownSettings"
         [data]="focusMuscleList"
         formControlName="focusMuscle"

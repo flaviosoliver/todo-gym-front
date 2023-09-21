@@ -88,14 +88,7 @@ export class CardsAreaExerciseComponent implements OnInit {
   }
 
   async findExercises(params: ParamsDto): Promise<Exercise[]> {
-    if (
-      (params.focusMuscle == undefined || params.focusMuscle.length == 0) &&
-      params.name == '' &&
-      params.userId == undefined
-    ) {
-      await this.getAllExercises();
-      return [];
-    }
+    console.log(params);
     const result = await this.exercisesService.getByParams(params).toPromise();
     this.isLoading = false;
     return (this.exercises = result && result.length > 0 ? result : []);
