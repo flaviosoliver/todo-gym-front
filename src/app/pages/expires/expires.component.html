@@ -1,0 +1,16 @@
+<div class="plans-container">
+  <app-bar-navigation [isHome]="false"> </app-bar-navigation>
+  <div class="area-main">
+    <div class="area-header">
+      <app-search placeholder="Pesquise pelo nome do plano..."> </app-search>
+      <app-select-multi
+        class="select-multi"
+        label="Plano focado em"
+        [itemsShowLimit]="2"
+      ></app-select-multi>
+    </div>
+  </div>
+  <app-btn-add label="Criar Novo"></app-btn-add>
+</div>
+
+<!-- (click)="routeTo('plans/form')" -->
