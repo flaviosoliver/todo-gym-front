@@ -136,4 +136,8 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['']);
     this.isLoading = false;
   }
+
+  onCancelClick() {
+    this.router.navigate(['/']);
+  }
 }

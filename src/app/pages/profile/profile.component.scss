@@ -3,7 +3,7 @@
 
 @include mat.core();
 
-.profile-container {
+.area-main {
   display: flex;
   height: 100vh;
   flex-direction: column;
@@ -94,5 +94,47 @@
     align-items: center;
     font-size: 13px;
     font-weight: 600;
+  }
+
+  .btn-area {
+    display: flex;
+    justify-content: space-evenly;
+
+    .btn-confirm {
+      display: flex;
+      align-items: center;
+      color: mat.get-color-from-palette($md-primary, 500);
+      font-weight: 700;
+      justify-content: center;
+
+      &:hover {
+        cursor: pointer;
+        background-position: right center;
+        box-shadow: 0 0 20px #eee;
+        color: #fff;
+      }
+    }
+
+    .btn-cancel {
+      display: flex;
+      align-items: center;
+      border: none;
+      border-radius: 20px;
+      color: mat.get-color-from-palette($md-primary, 500);
+      background-image: linear-gradient(135deg, #78919c 10%, #abe1ff 100%);
+      transition: 0.5s;
+      background-size: 200% auto;
+      font-weight: 700;
+      width: 90px;
+      padding: 6px;
+      justify-content: center;
+
+      &:hover {
+        cursor: pointer;
+        background-position: right center;
+        box-shadow: 0 0 20px #eee;
+        color: #fff;
+      }
+    }
   }
 }
