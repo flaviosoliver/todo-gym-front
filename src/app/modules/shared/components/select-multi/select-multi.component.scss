@@ -1,7 +1,11 @@
 .form-select-multi-custom {
-  width: 340px;
+  width: 100%;
   background: white;
   border-radius: 20px;
-  display: flex;
+  display: inline;
   margin: 0;
+}
+
+span.dropdown-btn {
+  display: inline-flex;
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Select } from '../../interface/select';
 
 @Component({
   selector: 'app-select-multi',
@@ -10,12 +11,13 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 export class SelectMultiComponent implements OnInit {
   @Input() label: string = '';
   @Input() optionsList: any[] = [];
-  @Output() selectedItems = new EventEmitter<any[]>();
+  @Input() itemsShowLimit: number = 1;
+  @Input() selectedItems: any[] = [];
+  @Output() selectedItemsChange = new EventEmitter<any[]>();
   myForm!: FormGroup;
   options = new FormControl('');
   ShowFilter = true;
   dropdownSettings: IDropdownSettings = {};
-  optionsChecked: string[] = [];
 
   constructor(private fb: FormBuilder) {}
 
@@ -29,38 +31,38 @@ export class SelectMultiComponent implements OnInit {
       unSelectAllText: 'Limpar Seleção',
       searchPlaceholderText: 'Pesquisar',
       enableCheckAll: true,
-      itemsShowLimit: 2,
+      itemsShowLimit: this.itemsShowLimit,
       allowSearchFilter: this.ShowFilter,
     };
     this.optionsList;
     this.myForm = this.fb.group({
-      option: [this.selectedItems],
+      option: [this.selectedItemsChange],
     });
   }
 
   onItemSelect(item: any) {
-    this.optionsChecked.push(item.text);
-    this.selectedItems.emit(this.optionsChecked);
+    this.selectedItems.push(item.text);
+    this.selectedItemsChange.emit(this.selectedItems);
   }
 
   onSelectAll(items: any[]) {
     items.forEach((item) => {
-      item.text = this.optionsChecked.push(item.text);
+      item.text = this.selectedItems.push(item.text);
     });
 
-    this.selectedItems.emit(this.optionsChecked);
+    this.selectedItemsChange.emit(this.selectedItems);
   }
 
   onDeSelectAll(event: any) {
-    this.optionsChecked = [];
+    this.selectedItems = [];
   }
 
   onItemDeSelect(item: any) {
     let forRemove = item.text;
-    this.optionsChecked = this.optionsChecked.filter(
+    this.selectedItems = this.selectedItems.filter(
       (i) => !forRemove.includes(i)
     );
-    this.selectedItems.emit(this.optionsChecked);
+    this.selectedItemsChange.emit(this.selectedItems);
   }
 
   toogleShowFilter() {

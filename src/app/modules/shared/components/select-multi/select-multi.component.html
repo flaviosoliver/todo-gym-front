@@ -5,6 +5,7 @@
     [placeholder]="label"
     [settings]="dropdownSettings"
     [data]="optionsList"
+    [(ngModel)]="selectedItems"
     (onSelect)="onItemSelect($event)"
     (onSelectAll)="onSelectAll($event)"
     (onDeSelect)="onItemDeSelect($event)"
