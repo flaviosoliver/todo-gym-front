@@ -26,6 +26,11 @@ import { ExercisesListComponent } from './pages/exercises-list/exercises-list.co
 import { CardsAreaExerciseComponent } from './pages/components/cards-area-exercise/cards-area-exercise.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ExerciseItemComponent } from './pages/components/exercise-item/exercise-item.component';
+import { PlansComponent } from './pages/plans/plans.component';
+import { CardAreaPlansComponent } from './pages/plans/components/card-area-plans/card-area-plans.component';
+import { PlanItemComponent } from './pages/plans/components/plan-item/plan-item.component';
+import { ExpiresComponent } from './pages/expires/expires.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 registerLocaleData(localePtBr);
 
@@ -40,6 +45,10 @@ registerLocaleData(localePtBr);
     ExercisesListComponent,
     CardsAreaExerciseComponent,
     ExerciseItemComponent,
+    PlansComponent,
+    CardAreaPlansComponent,
+    PlanItemComponent,
+    ExpiresComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +63,7 @@ registerLocaleData(localePtBr);
     PlansModule,
     ExercisesModule,
     NgMultiSelectDropDownModule.forRoot(),
+    NgSelectModule,
   ],
   providers: [
     CookieService,
