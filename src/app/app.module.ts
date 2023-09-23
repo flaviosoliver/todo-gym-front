@@ -31,6 +31,7 @@ import { CardAreaPlansComponent } from './pages/plans/components/card-area-plans
 import { PlanItemComponent } from './pages/plans/components/plan-item/plan-item.component';
 import { ExpiresComponent } from './pages/expires/expires.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { UnderConstructionComponent } from './pages/components/under-construction/under-construction.component';
 
 registerLocaleData(localePtBr);
 
@@ -49,6 +50,7 @@ registerLocaleData(localePtBr);
     CardAreaPlansComponent,
     PlanItemComponent,
     ExpiresComponent,
+    UnderConstructionComponent,
   ],
   imports: [
     BrowserModule,

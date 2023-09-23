@@ -1,0 +1,17 @@
+.under-construction-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding: 10px;
+
+  .under-construction-img {
+    width: 270px;
+    border-radius: 20px;
+  }
+
+  .under-construction-text-primary,
+  .under-construction-text-secondary {
+    text-align: center;
+  }
+}
